@@ -37,4 +37,4 @@ alias afind='ack-grep -il'
 # Custom aliases
 alias gst='nocorrect git status'
 alias nrs='nocorrect npm run-script'
-
+alias v='nocorrect mvim'
