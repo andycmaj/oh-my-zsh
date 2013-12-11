@@ -34,3 +34,7 @@ alias sl=ls # often screw this up
 
 alias afind='ack-grep -il'
 
+# Custom aliases
+alias gst='nocorrect git status'
+alias nrs='nocorrect npm run-script'
+
