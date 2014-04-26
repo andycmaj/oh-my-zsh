@@ -111,11 +111,11 @@ prompt_hg() {
         # if working copy is clean
         prompt_segment green black
       fi
-      echo -n $(hg prompt "☿ {rev}@{branch}") $st
+      echo -n $(hg prompt "☿ {rev} = {branch}") $st
     else
       st=""
-      rev=$(hg id -n 2>/dev/null | sed 's/[^-0-9]//g')
-      branch=$(hg id -b 2>/dev/null)
+      rev=$(hg id -i 2>/dev/null)
+      branch=$(hg id -t 2>/dev/null | sed 's/ tip//g')
       if `hg st | grep -Eq "^\?"`; then
         prompt_segment red black
         st='±'
@@ -125,7 +125,7 @@ prompt_hg() {
       else
         prompt_segment green black
       fi
-      echo -n "☿ $rev@$branch" $st
+      echo -n "☿ $rev [$branch]" $st
     fi
   fi
 }
