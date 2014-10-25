@@ -16,8 +16,11 @@ alias hgs='hg status'
 alias hgsl='log --limit 20 --template "{node|short} | {date|isodatesec} | {author|user}: {desc|strip|firstline}\n" '
 # this is the 'git commit --amend' equivalent
 alias hgca='hg qimport -r tip ; hg qrefresh -e ; hg qfinish tip'
-alias hqpo='hg qpop'
-alias hqpu='hg qpush'
+alias qr='hg qrefresh'
+alias qo='hg qpop'
+alias qu='hg qpush'
+alias qs='hg qseries'
+alias qa='hg qapplied'
 
 function in_hg() {
   if [[ -d .hg ]] || $(hg summary > /dev/null 2>&1); then
@@ -39,8 +42,9 @@ function hg_get_current_patch() {
 
 function hg_prompt_info {
   if [ $(in_hg) ]; then
+    _BRANCH=$(hg_get_branch_name)
     _DISPLAY=$(hg_get_current_patch)
-    echo "$ZSH_PROMPT_BASE_COLOR$ZSH_THEME_HG_PROMPT_PREFIX\
+    echo "$ZSH_PROMPT_BASE_COLOR$_BRANCH$ZSH_THEME_HG_PROMPT_PREFIX\
 $ZSH_THEME_REPO_NAME_COLOR$_DISPLAY$ZSH_PROMPT_BASE_COLOR$ZSH_THEME_HG_PROMPT_SUFFIX$ZSH_PROMPT_BASE_COLOR$(hg_dirty)$ZSH_PROMPT_BASE_COLOR"
     unset _DISPLAY
   fi

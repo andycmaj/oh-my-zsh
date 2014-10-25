@@ -115,7 +115,8 @@ prompt_hg() {
     else
       st=""
       rev=$(hg id -i 2>/dev/null)
-      branch=$(hg id -t 2>/dev/null | sed 's/ tip//g')
+      labels=$(hg id -t 2>/dev/null | sed 's/ tip//g')
+      branch=$(hg id -b 2>/dev/null)
       if `hg st | grep -Eq "^\?"`; then
         prompt_segment red black
         st='±'
@@ -125,7 +126,7 @@ prompt_hg() {
       else
         prompt_segment green black
       fi
-      echo -n "☿ $rev [$branch]" $st
+      echo -n "☿ ($branch) $rev [$labels]" $st
     fi
   fi
 }
